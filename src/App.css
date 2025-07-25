@@ -1,0 +1,670 @@
+@import "tailwindcss";
+
+/* Custom Fonts */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --text-primary: #f0f6fc; /* Default to dark mode primary */
+  --text-secondary: #8b949e; /* Default to dark mode secondary */
+  /* Dark Mode Variables */
+  --dark-background: #0a0e13;
+  --dark-background-secondary: #161b22;
+  --dark-text-primary: #f0f6fc;
+  --dark-text-secondary: #8b949e;
+  --dark-text-muted: #6e7681;
+  --glass-border-dark: rgba(255, 255, 255, 0.12);
+  --glass-bg-dark: rgba(255, 255, 255, 0.08);
+  --input-bg-dark: rgba(255, 255, 255, 0.06);
+  --input-border-dark: rgba(255, 255, 255, 0.15);
+  --button-border-dark: rgba(255, 255, 255, 0.2);
+  --button-text-dark: #f0f6fc;
+  --button-hover-bg-dark: rgba(255, 255, 255, 0.12);
+
+  /* Light Mode Variables - Adjusted for less brightness */
+  --light-background: #e0e7ed; /* Softer, muted light grey-blue */
+  --light-background-secondary: #f0f5f9; /* Slightly lighter for secondary elements */
+  --light-text-primary: #0f172a;
+  --light-text-secondary: #475569;
+  --light-text-muted: #64748b;
+  --glass-border-light: rgba(0, 0, 0, 0.08);
+  --glass-bg-light: rgba(255, 255, 255, 0.9);
+  --input-bg-light: rgba(248, 250, 252, 0.8);
+  --input-border-light: rgba(0, 0, 0, 0.12);
+  --button-border-light: rgba(0, 0, 0, 0.15);
+  --button-text-light: #0f172a;
+  --button-hover-bg-light: rgba(0, 0, 0, 0.05);
+
+  /* */
+  --text-primary: var(--dark-text-primary);
+  --text-secondary: var(--dark-text-secondary);
+  --text-muted: var(--dark-text-muted);
+  --separator-border: #4a5568; /* New: for the OR line */
+  --link-color: #60a5fa; /* New: for links */
+  --link-hover-color: #3b82f6; /* New: for link hover */
+}
+
+/* Base Body Styles */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--dark-background);
+  color: var(--dark-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Dark Mode */
+body.dark {
+  background: linear-gradient(135deg, var(--dark-background) 0%, var(--dark-background-secondary) 100%);
+  color: var(--dark-text-primary);
+}
+
+/* Light Mode */
+body.light {
+   --text-primary: #0f172a; /* Override for light mode */
+  --text-secondary: #475569; /* Override for light mode */
+  background: linear-gradient(135deg, var(--light-background) 0%, var(--light-background-secondary) 100%);
+  color: var(--light-text-primary);
+  /* ... existing overrides ... */
+  --text-primary: var(--light-text-primary);
+  --text-secondary: var(--light-text-secondary);
+  --text-muted: var(--light-text-muted);
+  --separator-border: #cbd5e0; /* Light mode separator */
+  --link-color: #2563eb; /* Light mode link */
+  --link-hover-color: #1d4ed8; /* Light mode link hover */
+}
+
+/* Enhanced Glassmorphism Effect */
+.glass-effect {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border-dark);
+  background-color: var(--glass-bg-dark);
+  border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body.light .glass-effect {
+  border: 1px solid var(--glass-border-light);
+  background-color: var(--glass-bg-light);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Enhanced Input Styles */
+.input-field {
+  background-color: var(--input-bg-dark);
+  border: 1.5px solid var(--input-border-dark);
+  padding: 0.875rem 1rem;
+  border-radius: 8px;
+  color: var(--dark-text-primary);
+  outline: none;
+  width: 100%;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.input-field:focus {
+  border-color: #3b82f6;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+body.light .input-field {
+  background-color: var(--input-bg-light);
+  border: 1.5px solid var(--input-border-light);
+  color: var(--light-text-primary);
+}
+
+body.light .input-field:focus {
+  border-color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.02);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+}
+
+.input-field::placeholder {
+  color: var(--dark-text-muted);
+  opacity: 0.8;
+}
+
+body.light .input-field::placeholder {
+  color: var(--light-text-muted);
+  opacity: 0.8;
+}
+
+/* Specific styling for <select> and its <option> elements */
+.input-field select {
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none;    /* For Firefox */
+  appearance: none;         /* Standard */
+  background-color: var(--input-bg-dark); /* Default to dark mode input bg */
+  color: var(--dark-text-primary); /* Default to dark mode primary text */
+  border: 1.5px solid var(--input-border-dark);
+}
+
+body.light .input-field select {
+  background-color: var(--input-bg-light);
+  color: var(--light-text-primary);
+  border: 1.5px solid var(--input-border-light);
+}
+
+.input-field option {
+  background-color: var(--dark-background-secondary); /* A slightly lighter dark for contrast */
+  color: var(--dark-text-primary);
+}
+
+body.light .input-field option {
+  background-color: var(--light-background-secondary); /* A slightly darker light for contrast */
+  color: var(--light-text-primary);
+}
+
+
+/* Enhanced Button Styles */
+.btn-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border: 1.5px solid var(--button-border-dark);
+  color: var(--button-text-dark);
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.btn-glass:hover::before {
+  opacity: 1;
+}
+
+/* Adjusted hover for default/invalid state - More minimal/lighter but noticeable */
+.btn-glass:hover {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.3) 0%, rgba(167, 139, 250, 0.2) 100%); /* Subtle blue-purple tint */
+  border-color: rgba(96, 165, 250, 0.4); /* More visible border */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: var(--text-primary);
+}
+
+body.light .btn-glass {
+  /* Make the default light mode button more visible */
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(124, 58, 237, 0.08) 100%);
+  border: 1.5px solid rgba(0, 0, 0, 0.1); /* Slightly darker border */
+  color: var(--light-text-primary); /* Use a darker text color for visibility */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Add a subtle shadow */
+}
+
+body.light .btn-glass:hover {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25) 0%, rgba(124, 58, 237, 0.15) 100%); /* Subtle light blue-purple tint */
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--light-text-primary); /* Ensure text becomes primary on hover */
+}
+
+/* Styles for when the button is valid (all required fields filled) - More noticeable hover */
+.btn-glass-valid {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.3) 0%, rgba(167, 139, 250, 0.2) 100%); /* Subtle gradient from text-gradient */
+  border-color: rgba(96, 165, 250, 0.4);
+  color: var(--text-primary); /* Keep primary text color */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-glass-valid:hover {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.6) 0%, rgba(167, 139, 250, 0.3) 100%); /* More pronounced gradient on hover */
+  border-color: rgba(96, 165, 250, 0.7); /* Even stronger border */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35); /* More pronounced shadow */
+}
+
+body.light .btn-glass-valid {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(124, 58, 237, 0.08) 100%);
+  border-color: rgba(37, 99, 235, 0.3);
+  color: var(--light-text-primary);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body.light .btn-glass-valid:hover {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25) 0%, rgba(124, 58, 237, 0.18) 100%);
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for when the button is invalid (required fields not filled) */
+.btn-glass-invalid {
+  opacity: 0.6; /* Slightly dim it */
+  cursor: not-allowed;
+  /* Retain original subtle background/border from .btn-glass */
+}
+
+/* Styles for successful submission - More minimal/lighter, inspired by text-gradient */
+.btn-glass-success {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.3) 0%, rgba(167, 139, 250, 0.2) 100%); /* Subtle blue-purple gradient */
+  border-color: rgba(96, 165, 250, 0.5);
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  pointer-events: none; /* Disable interaction during success state */
+}
+
+body.light .btn-glass-success {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(124, 58, 237, 0.1) 100%);
+  border-color: rgba(37, 99, 235, 0.4);
+  color: var(--light-text-primary);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Animation for the success text */
+@keyframes successTextFadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glowing Button Styles */
+.glowing-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem; /* Default padding for glowing button */
+  border-radius: 9999px; /* Fully rounded */
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary); /* Use theme primary text color */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  background: rgba(255, 255, 255, 0.05); /* Very subtle background */
+  transition: all 0.3s ease;
+  z-index: 1; /* Ensure text and SVG are above the effect */
+}
+
+.glowing-button:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+body.light .glowing-button {
+  color: var(--light-text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+body.light .glowing-button:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.glowing-button-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(113, 152, 199, 0.6) 0%, transparent 70%); /* Blue glow */
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out;
+  z-index: -1; /* Behind content */
+}
+
+body.light .glowing-button-effect {
+  background: radial-gradient(circle, rgba(145, 187, 255, 0.5) 0%, transparent 70%); /* Darker blue glow for light mode */
+}
+
+.glowing-button:hover .glowing-button-effect {
+  width: 200%; /* Expand to cover button */
+  height: 200%;
+  opacity: 1;
+}
+
+.glowing-button-text {
+  position: relative;
+  z-index: 2; /* Ensure text is above effect */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.glowing-button-text svg {
+  fill: currentColor; /* Inherit color from parent */
+}
+
+
+/* Enhanced Text Gradient */
+.text-gradient {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+body.light .text-gradient {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Enhanced Background Grid */
+.hero-lines-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  /* Changed grid density: more columns and rows for smaller boxes */
+  grid-template-columns: repeat(12, 1fr); /* Increased from 6 to 12 */
+  grid-template-rows: repeat(12, 1fr);    /* Increased from 6 to 12 */
+  gap: 0;
+  opacity: 0.3; /* Slightly increased opacity from 0.2 to 0.3 for a bit more presence while remaining subtle */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-h-line, .hero-v-line {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 40%, transparent 80%); /* Slightly reduced opacity of line color */
+  position: relative;
+  z-index: 0;
+}
+
+body.light .hero-h-line, body.light .hero-v-line {
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.04) 40%, transparent 80%); /* Adjusted for light mode */
+}
+
+.hero-h-line {
+  height: 1px;
+  grid-column: 1 / -1;
+}
+
+.hero-v-line {
+  width: 1px;
+  grid-row: 1 / -1;
+  background: linear-gradient(0deg, transparent 0%, rgba(255, 255, 255, 0.08) 40%, transparent 80%); /* Slightly reduced opacity of line color */
+}
+
+body.light .hero-v-line {
+  background: linear-gradient(0deg, transparent 0%, rgba(0, 0, 0, 0.04) 40%, transparent 80%); /* Adjusted for light mode */
+}
+
+/* Cross Elements */
+.hero-cross {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0.32; /* Slightly reduced opacity for subtlety */
+  pointer-events: none;
+}
+
+.hero-cross::before, .hero-cross::after {
+  content: '';
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.15); /* Slightly reduced opacity */
+  border-radius: 1px;
+}
+
+body.light .hero-cross::before,
+body.light .hero-cross::after {
+  background-color: rgba(0, 0, 0, 0.08); /* Adjusted for light mode */
+}
+
+
+/* Enhanced Theme Toggle */
+.toggle-cont {
+  --primary: #3b82f6;
+  --light: #f1f5f9;
+  --dark: #1e293b;
+  --gray: #475569;
+  position: relative;
+  z-index: 10;
+  width: fit-content;
+  height: 24px;
+  border-radius: 9999px;
+}
+
+.toggle-cont .toggle-input {
+  display: none;
+}
+
+.toggle-cont .toggle-label {
+  --gap: 5px;
+  --width: 20px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 0.4rem;
+  width: calc((var(--width) + var(--gap)) * 2);
+  height: 100%;
+  background-color: var(--dark);
+  border: 1px solid #777777;
+  border-bottom: 0;
+  border-radius: 9999px;
+  box-sizing: content-box;
+  transition: all 0.3s ease-in-out;
+}
+
+.toggle-label::before {
+  content: "";
+  position: absolute;
+  z-index: -10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 1.5rem);
+  height: calc(100% + 1.5rem);
+  background-color: var(--gray);
+  border: 1px solid #777777;
+  border-bottom: 0;
+  border-radius: 9999px;
+  transition: all 0.3s ease-in-out;
+}
+
+.toggle-label::after {
+  content: "";
+  position: absolute;
+  z-index: -10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 50% -100%,
+    rgb(58, 155, 252) 0%,
+    rgba(12, 12, 12, 1) 80%
+  );
+  border-radius: 9999px;
+}
+
+.toggle-cont .toggle-label .cont-icon {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--width);
+  height: 20px;
+  background-image: radial-gradient(
+    circle at 50% 0%,
+    #666666 0%,
+    var(--gray) 100%
+  );
+  border: 1px solid #aaaaaa;
+  border-bottom: 0;
+  border-radius: 9999px;
+  box-shadow: inset 0 -0.15rem 0.15rem var(--primary),
+    inset 0 0 0.5rem 0.75rem var(--second, transparent);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cont-icon {
+  overflow: clip;
+  position: relative;
+}
+
+.cont-icon .sparkle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: calc(var(--width) * 1px);
+  aspect-ratio: 1;
+  background-color: var(--light);
+  border-radius: 50%;
+  transform-origin: 50% 50%;
+  rotate: calc(1deg * var(--deg));
+  transform: translate(-50%, -50%);
+  animation: sparkle calc(100s / var(--duration)) linear
+    calc(0s / var(--duration)) infinite;
+}
+
+@keyframes sparkle {
+  to {
+    width: calc(var(--width) * 0.5px);
+    transform: translate(2000%, -50%);
+  }
+}
+
+.cont-icon .icon {
+  width: 0.7rem;
+  fill: var(--light);
+}
+
+.toggle-cont:has(.toggle-input:checked) {
+  --checked: true;
+}
+
+/* Checked state styles */
+.toggle-cont.checked .toggle-label {
+  background-color: rgba(65, 67, 68, 0);
+  border: 1px solid #3d6970;
+  border-bottom: 0;
+}
+
+.toggle-cont.checked .toggle-label::before {
+  box-shadow: 0 1rem 2.5rem -2rem #0080ff;
+}
+
+.toggle-cont.checked .toggle-label .cont-icon {
+  overflow: visible;
+  background-image: radial-gradient(
+    circle at 50% 0%,
+    #045ab1 0%,
+    var(--primary) 100%
+  );
+  border: 1px solid var(--primary);
+  border-bottom: 0;
+  transform: translateX(calc((var(--gap) * 2) + 100%)) rotate(-225deg);
+}
+
+.toggle-cont.checked .toggle-label .cont-icon .sparkle {
+  z-index: -10;
+  width: calc(var(--width) * 1.5px);
+  background-color: #acacac;
+  animation: sparkle-checked calc(100s / var(--duration)) linear
+    calc(10s / var(--duration)) infinite;
+}
+
+@keyframes sparkle-checked {
+  to {
+    width: calc(var(--width) * 1px);
+    transform: translate(5000%, -50%);
+  }
+}
+
+
+/* Additional utility classes */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive design enhancements */
+@media (max-width: 768px) {
+  .glass-effect {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .input-field {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.9rem;
+  }
+
+  .btn-glass {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  /* Adjust grid density for smaller screens if needed, otherwise inherit */
+  .hero-lines-grid {
+    grid-template-columns: repeat(8, 1fr); /* Slightly less dense for smaller screens */
+    grid-template-rows: repeat(8, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .toggle-cont {
+    transform: scale(0.9);
+  }
+
+  .glass-effect {
+    border-radius: 8px;
+  }
+}
